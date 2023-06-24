@@ -1,34 +1,19 @@
-import * as React from 'react';
-import {FC, useEffect, useState} from 'react';
-import Question from "../model/Question"
-import {initQuestionLoader, QuestionLoader} from "../service/QuestionLoader";
-
-export interface QuestionManagerConfig {
-    title: string,
-    subTitle: string,
-    formKey: string,
-    listKey: string,
-    presentationMode: boolean
-}
+import * as React from "react";
+import { FC } from "react";
+import { useQuestions } from "../hook/useQuestion";
 
 export interface QuestionManagerProps {
-    config: QuestionManagerConfig
+    storageKey: string;
 }
 
-export const QuestionManager: FC<QuestionManagerProps> = ({config}) => {
-
-    const [questions, setQuestions] = useState<Question[]>([{id: 0, label: "Chargement des questions ..."}]);
-    const [questionLoader] = useState<QuestionLoader>(initQuestionLoader(setQuestions, config.listKey));
-
-    useEffect(() => {
-        setInterval(questionLoader.load, 2000)
-    }, [])
-
+export const QuestionManager: FC<QuestionManagerProps> = ({ storageKey }) => {
+    const questions = useQuestions(storageKey);
 
     return (
         <div>
-            {questions.map(question => <div>{question.label}</div>)}
+            {questions.map((question) => (
+                <div key={question.id}>{question.label}</div>
+            ))}
         </div>
     );
-
-}
+};

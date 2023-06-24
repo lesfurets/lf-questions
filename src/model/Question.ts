@@ -1,4 +1,4 @@
 export default interface Question {
-    id: number,
-    label: string
+    id: number;
+    label: string;
 }
