@@ -1,6 +1,7 @@
 import * as React from "react";
 import { FC } from "react";
 import { useQuestions } from "../hook/useQuestion";
+import {Grid} from "@mui/material";
 
 export interface QuestionManagerProps {
     storageKey: string;
@@ -10,10 +11,10 @@ export const QuestionManager: FC<QuestionManagerProps> = ({ storageKey }) => {
     const questions = useQuestions(storageKey);
 
     return (
-        <div>
+        <Grid container spacing={2}>
             {questions.map((question) => (
-                <div key={question.id}>{question.label}</div>
+                <Grid item xs={8}>{question.label}</Grid>
             ))}
-        </div>
+        </Grid>
     );
 };
