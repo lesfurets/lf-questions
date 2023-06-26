@@ -1,10 +1,12 @@
 import * as React from "react";
-import { FC } from "react";
-import { QuestionManager, QuestionManagerProps } from "./QuestionManager";
+import {FC} from "react";
+import {QuestionManager, QuestionManagerProps} from "./QuestionManager";
 import AppBar from "./AppBar";
-import {createMuiTheme, createTheme, CssBaseline, ThemeProvider} from "@mui/material";
+import {Box, createTheme, CssBaseline, ThemeProvider} from "@mui/material";
+import {QuestionCollector} from "./QuestionCollector";
 
 let config: QuestionManagerProps = {
+    formKey: "1FAIpQLSfoYsWm4_LAyf43XA0Cr93QsZsHF0vqHygyAGGLhzUFYFnyAw",
     storageKey: "1NsncYC4vb-eO84Ucc8ohnsBBxVocwoAxe5F1AnePU6I",
 };
 
@@ -27,8 +29,6 @@ export const RootApp: FC = () => (
     <ThemeProvider theme={mainTheme}>
         <CssBaseline />
         <AppBar/>
-        <React.Suspense fallback={<div>Loading</div>}>
-            <QuestionManager {...config} />
-        </React.Suspense>
+        <QuestionCollector formKey={config.formKey}/>
     </ThemeProvider>
 );
