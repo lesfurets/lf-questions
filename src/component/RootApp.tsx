@@ -1,8 +1,8 @@
 import * as React from "react";
 import {FC} from "react";
-import {QuestionManager, QuestionManagerProps} from "./QuestionManager";
+import {QuestionManager} from "./QuestionManager";
 import AppBar from "./AppBar";
-import {Box, createTheme, CssBaseline, Grid, ThemeProvider} from "@mui/material";
+import {createTheme, CssBaseline, Grid, ThemeProvider} from "@mui/material";
 import {QuestionCollector} from "./QuestionCollector";
 
 let config = {
@@ -27,12 +27,12 @@ const mainTheme = createTheme({
 
 export const RootApp: FC = () => (
     <ThemeProvider theme={mainTheme}>
-        <CssBaseline />
+        <CssBaseline/>
         <AppBar/>
         <Grid container spacing={0}>
-            <Grid item xs={2} />
-            <Grid item xs={8} >
-                <QuestionManager storageKey={config.storageKey} />
+            <Grid item xs={2}/>
+            <Grid item xs={8}>
+                <QuestionManager storageKey={config.storageKey}/>
             </Grid>
         </Grid>
         <QuestionCollector formKey={config.formKey}/>

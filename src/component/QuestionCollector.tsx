@@ -11,7 +11,7 @@ interface QuestionCollectorProps {
 }
 
 const fabStyle = {
-    position: 'absolute',
+    position: 'fixed',
     bottom: {xs: 80, md:16},
     right: 16,
 };

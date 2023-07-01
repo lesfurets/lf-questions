@@ -10,6 +10,6 @@ export interface QuestionManagerProps {
 
 export const QuestionManager: FC<QuestionManagerProps> = ({storageKey}) => (
     <React.Suspense fallback={<Loading color={useTheme().palette.common.white}/>}>
-        <QuestionList storageKey={storageKey}/>;
+        <QuestionList storageKey={storageKey}/>
     </React.Suspense>
 );
