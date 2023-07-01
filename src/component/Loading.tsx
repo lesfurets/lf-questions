@@ -1,17 +1,21 @@
 import * as React from "react";
-import {CircularProgress, Grid} from "@mui/material";
+import {CircularProgress, Grid, useTheme} from "@mui/material";
 
-export const Loading = () => (
+export interface LoadingProps {
+    color?: string,
+}
+
+export const Loading = ({color}: LoadingProps) => (
     <Grid
         container
         spacing={0}
         direction="column"
         alignItems="center"
         justifyContent="center"
-        sx={{ minHeight: '100%' }}
+        sx={{height: '100%', minHeight:"400px"}}
     >
         <Grid item xs={3}>
-            <CircularProgress color="primary"/>
+            <CircularProgress size={60} sx={{color: color || useTheme().palette.primary.main}}/>
         </Grid>
     </Grid>
 );

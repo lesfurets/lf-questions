@@ -1,12 +1,15 @@
 import * as React from "react";
 import {FC} from "react";
-import {useQuestions} from "../hook/useQuestion";
 import {QuestionList} from "./QuestionList";
+import {Loading} from "./Loading";
+import {useTheme} from "@mui/material";
 
 export interface QuestionManagerProps {
-    formKey: string,
     storageKey: string;
 }
 
-export const QuestionManager: FC<QuestionManagerProps> = ({storageKey}) =>
-    <QuestionList questions={useQuestions(storageKey)}/>;
+export const QuestionManager: FC<QuestionManagerProps> = ({storageKey}) => (
+    <React.Suspense fallback={<Loading color={useTheme().palette.common.white}/>}>
+        <QuestionList storageKey={storageKey}/>;
+    </React.Suspense>
+);

@@ -2,10 +2,10 @@ import * as React from "react";
 import {FC} from "react";
 import {QuestionManager, QuestionManagerProps} from "./QuestionManager";
 import AppBar from "./AppBar";
-import {Box, createTheme, CssBaseline, ThemeProvider} from "@mui/material";
+import {Box, createTheme, CssBaseline, Grid, ThemeProvider} from "@mui/material";
 import {QuestionCollector} from "./QuestionCollector";
 
-let config: QuestionManagerProps = {
+let config = {
     formKey: "1FAIpQLSfoYsWm4_LAyf43XA0Cr93QsZsHF0vqHygyAGGLhzUFYFnyAw",
     storageKey: "1NsncYC4vb-eO84Ucc8ohnsBBxVocwoAxe5F1AnePU6I",
 };
@@ -29,6 +29,12 @@ export const RootApp: FC = () => (
     <ThemeProvider theme={mainTheme}>
         <CssBaseline />
         <AppBar/>
+        <Grid container spacing={0}>
+            <Grid item xs={2} />
+            <Grid item xs={8} >
+                <QuestionManager storageKey={config.storageKey} />
+            </Grid>
+        </Grid>
         <QuestionCollector formKey={config.formKey}/>
     </ThemeProvider>
 );
