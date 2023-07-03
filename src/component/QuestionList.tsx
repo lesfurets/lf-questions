@@ -30,7 +30,8 @@ const navReducer = (navState: NavState, action: NavAction) => {
             ...navState,
             currentQuestion: questions[index - 1]
         }
-    }  if (action.type === NavActionType.NEXT) {
+    }
+    if (action.type === NavActionType.NEXT) {
         return (index === questions.length - 1) ? navState : {
             ...navState,
             currentQuestion: questions[index + 1]
@@ -60,20 +61,22 @@ export const QuestionList: FC<QuestionListProps> = ({storageKey}) => {
         }, false);
     }, [])
 
-    const onSelect = (offset: number) => {
+    const onSelect = (top: number, bottom: number) => {
         const appBarOffset = aboveMD ? 64 : 0;
-        const target = offset - appBarOffset + ref.current.scrollTop;
+        const target = bottom - top > 250
+            ? top - appBarOffset + ref.current.scrollTop - 15
+            : bottom - appBarOffset + ref.current.scrollTop - 250
         ref.current.scrollTo({top: target, behavior: 'smooth'});
     }
 
     return (
         <Container sx={{height: "calc(100vh - 64px)", overflowY: "hidden"}} ref={ref}>
-            <Stack spacing={10} sx={{marginTop: "40vh", marginBottom: "100vh"}}>
+            <Stack spacing={{xs: 3, md: 10}} sx={{marginTop: "40vh", marginBottom: "100vh"}}>
                 {questions.map((question) => (
                     <QuestionCard
                         key={question.id}
                         question={question}
-                        isSelected={question === state.currentQuestion}
+                        isSelected={question.id === state.currentQuestion.id}
                         onSelect={onSelect}/>
                 ))}
             </Stack>
