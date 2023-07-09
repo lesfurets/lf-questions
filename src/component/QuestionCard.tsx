@@ -1,37 +1,23 @@
 import * as React from 'react';
-import {FC, useEffect, useRef} from 'react';
 import Question from "../model/Question"
-import {Paper, Typography, useTheme} from "@mui/material";
+import {Paper, Typography} from "@mui/material";
 
 interface QuestionProps {
     question: Question;
-    isSelected: boolean;
-    onSelect: (top: number, bottom: number) => void;
+    isHighlighted: boolean;
 }
 
-export const QuestionCard: FC<QuestionProps> = ({question, isSelected, onSelect}) => {
-    const cardRef = useRef(null);
-    const theme = useTheme();
-
-    useEffect(() => {
-        if (isSelected) {
-            onSelect(
-                cardRef.current.getBoundingClientRect().top,
-                cardRef.current.getBoundingClientRect().bottom
-            );
-        }
-    }, [isSelected]);
-
-    return (
+export const QuestionCard = React.forwardRef<HTMLDivElement, QuestionProps>(({question, isHighlighted}, ref) =>
+    (
         <Paper
-            elevation={isSelected ? 10 : 0}
-            ref={cardRef}
+            elevation={isHighlighted ? 10 : 0}
+            ref={ref}
             sx={theme => ({
                 padding: theme.spacing(2),
                 color: theme.palette.text.secondary,
                 position: "relative",
                 borderBottomLeftRadius: 0,
-                opacity: isSelected ? 1 : 0.5,
+                opacity: isHighlighted ? 1 : 0.5,
                 whiteSpace: "pre-wrap",
                 transition: theme.transitions.create(
                     ['box-shadow', 'opacity'],
@@ -53,5 +39,4 @@ export const QuestionCard: FC<QuestionProps> = ({question, isSelected, onSelect}
                 {question.label}
             </Typography>
         </Paper>
-    );
-}
+    ))
